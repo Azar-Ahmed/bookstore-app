@@ -1,7 +1,7 @@
 import User from "../models/user.model.js";
 import bcrypt from "bcryptjs";
-import generateToken from "../utils/jwt.utils.js";
 import { uploadImage } from "../utils/fileUpload.utils.js";
+import generateToken from "../utils/jwt.utils.js";
 
 export const signUp = async (req, res, next) => {
   try {
@@ -12,25 +12,30 @@ export const signUp = async (req, res, next) => {
       return res.status(404).json({ message: "All fields are required!" });
     }
 
-    const userExists = await User.findOne({ email });
+    const userExists = await User.findOne({
+      $or: [{ email }, { phone }],
+    });
+
     if (userExists) {
-      return res.status(404).json({ message: "Email Already Exist!" });
+      const conflictField = userExists.email === email ? "Email Id" : "Phone no";
+      return res
+        .status(409)
+        .json({ message: `${conflictField} Already Exists!` });
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
     let profileImage = {};
 
-    if (file) {
-      const { public_id, secure_url } = await uploadImage(file);
-      profileImage = { public_id, secure_url };
-      console.log("Cloudinary response:", profileImage);
-    } else {
+    if (!file) {
       return res
         .status(404)
         .json({ message: "No file received, Please Upload Profile Image!" });
     }
 
+    const { public_id, secure_url } = await uploadImage(file);
+    profileImage = { public_id, secure_url };
+   
     const user = await User.create({
       name,
       email,
@@ -42,6 +47,7 @@ export const signUp = async (req, res, next) => {
     const token = generateToken(user._id);
     res.status(201).json({ token, user });
   } catch (error) {
+    console.log(error.message);
     return res.status(500).json({ message: "Internal Server Error!" });
   }
 };

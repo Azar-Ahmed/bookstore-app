@@ -6,13 +6,14 @@ import cors from 'cors'
 import fileUpload from "express-fileupload";
 import connectDB from './config/db.config.js'
 import userRoutes from './routes/user.routes.js'
+import productRoutes from './routes/product.route.js'
 // import errorHandler from './middlewares/error.middleware.js'
 dotenv.config() 
 connectDB() //Database Connection
 
 const app = express()
 
-//Middlewares
+// Middlewares
 app.use(bodyParser.json())
 app.use(fileUpload({ useTempFiles: true }));
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -30,9 +31,9 @@ app.use(cors({
     credentials: true
 }))
 
-//
 // Routes
 app.use("/api/v1/user", userRoutes)
+app.use("/api/v1/product", productRoutes)
 
 // Error Handling
 // app.use(errorHandler);
