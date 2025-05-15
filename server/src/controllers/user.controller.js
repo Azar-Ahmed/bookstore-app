@@ -47,9 +47,8 @@ export const signUp = async (req, res, next) => {
 
     const token = generateToken(user._id);
     res.status(201).json({ token, user });
-  } catch (error) {
-    console.log(error.message);
-    return res.status(500).json({ message: "Internal Server Error!" });
+  } catch (err) {
+    next(err); // Pass error to error handler
   }
 };
 
@@ -76,16 +75,16 @@ export const signIn = async (req, res, next) => {
       message: "User Sign In Successfully!",
       user
     });
-  } catch (error) {
-    return res.status(500).json({ message: "Internal Server Error!" });
+  } catch (err) {
+    next(err); // Pass error to error handler
   }
 };
 
 export const signOut = async (req, res, next) => {
   try {
     res.clearCookie("token").json({ success: true, message: "User Logout!" });
-  } catch (error) {
-    return res.status(500).json({ message: "Internal Server Error!" });
+  } catch (err) {
+    next(err); // Pass error to error handler
   }
 };
 
@@ -106,8 +105,8 @@ export const updateProfile = async (req, res, next) => {
     await user.save();
 
     res.status(200).json({ user, message: "Profile updated" });
-  } catch (error) {
-    return res.status(500).json({ message: "Internal Server Error!" });
+  }catch (err) {
+    next(err); // Pass error to error handler
   }
 };
 
@@ -141,8 +140,7 @@ export const changePassword = async (req, res, next) => {
     await user.save();
 
     res.status(200).json({ message: "Password updated successfully." });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Internal Server Error!" });
+  } catch (err) {
+    next(err); // Pass error to error handler
   }
 };

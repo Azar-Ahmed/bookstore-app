@@ -8,8 +8,8 @@ export const getAllProducts = async (req, res) => {
     res
       .status(200)
       .json({ message: "All products fetched successfully", products });
-  } catch (error) {
-    return res.status(500).json({ message: "Internal Server Error!" });
+  }catch (err) {
+    next(err); // Pass error to error handler
   }
 };
 
@@ -64,9 +64,8 @@ export const addProducts = async (req, res) => {
       product: newProduct,
     });
 
-  } catch (error) {
-    console.error("Add Product Error:", error);
-    return res.status(500).json({ message: "Internal Server Error!" });
+  } catch (err) {
+    next(err); // Pass error to error handler
   }
 };
 
@@ -127,9 +126,8 @@ export const updateProducts = async (req, res) => {
       updatedProduct,
     });
 
-  } catch (error) {
-    console.error("Update Product Error:", error);
-    return res.status(500).json({ message: "Internal Server Error!" });
+  } catch (err) {
+    next(err); // Pass error to error handler
   }
 };
 
@@ -158,9 +156,8 @@ export const deleteProducts = async (req, res) => {
       message: `Product with id ${productId} deleted successfully`,
     });
 
-  } catch (error) {
-    console.error("Delete Product Error:", error);
-    return res.status(500).json({ message: "Internal Server Error!" });
+  } catch (err) {
+    next(err); // Pass error to error handler
   }
 };
 
@@ -183,9 +180,8 @@ export const getProductDetails = async (req, res) => {
       product,
     });
 
-  } catch (error) {
-    console.error("Get Product Error:", error);
-    return res.status(500).json({ message: "Internal Server Error!" });
+  } catch (err) {
+    next(err); // Pass error to error handler
   }
 };
 
@@ -231,8 +227,7 @@ export const getFilterProducts = async (req, res) => {
       products,
     });
 
-  } catch (error) {
-    console.error("Filter Products Error:", error);
-    res.status(500).json({ message: "Internal Server Error!" });
+  }catch (err) {
+    next(err); // Pass error to error handler
   }
 };

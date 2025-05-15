@@ -7,7 +7,7 @@ import fileUpload from "express-fileupload";
 import connectDB from './config/db.config.js'
 import userRoutes from './routes/user.routes.js'
 import productRoutes from './routes/product.route.js'
-// import errorHandler from './middlewares/error.middleware.js'
+import errorHandler from './middlewares/error.middleware.js'
 dotenv.config() 
 connectDB() //Database Connection
 
@@ -36,7 +36,7 @@ app.use("/api/v1/user", userRoutes)
 app.use("/api/v1/product", productRoutes)
 
 // Error Handling
-// app.use(errorHandler);
+app.use(errorHandler);
 
 app.listen(process.env.PORT, ()=> {
     console.log(`Server is running at http://localhost:${process.env.PORT}`)
