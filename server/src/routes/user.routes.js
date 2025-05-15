@@ -9,6 +9,10 @@ router.post('/signin', signIn)
 router.get('/signout', isAuthenticated, signOut)
 router.put('/update', isAuthenticated, updateProfile)
 router.put('/change-password', isAuthenticated, changePassword)
+router.get('/me', isAuthenticated, (req, res) => {
+    res.status(200).json({ user: req.user });
+})
+
 
 
 export default router;

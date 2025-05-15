@@ -7,7 +7,16 @@ const productSchema = new mongoose.Schema(
     description: { type: String, required: true },
     category: {
       type: String,
-      enum: ["Fiction", "Non-Fiction", "Others"],
+      enum: [
+        "Classic Fiction",
+        "Fantasy",
+        "Mystery",
+        "Non-Fiction",
+        "Philosophical Fiction",
+        "Romance",
+        "Self-help",
+        "Thriller",
+      ],
       required: true,
     },
     price: { type: Number, min: 0, required: true },

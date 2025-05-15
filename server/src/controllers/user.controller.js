@@ -17,7 +17,8 @@ export const signUp = async (req, res, next) => {
     });
 
     if (userExists) {
-      const conflictField = userExists.email === email ? "Email Id" : "Phone no";
+      const conflictField =
+        userExists.email === email ? "Email Id" : "Phone no";
       return res
         .status(409)
         .json({ message: `${conflictField} Already Exists!` });
@@ -35,7 +36,7 @@ export const signUp = async (req, res, next) => {
 
     const { public_id, secure_url } = await uploadImage(file);
     profileImage = { public_id, secure_url };
-   
+
     const user = await User.create({
       name,
       email,
@@ -70,7 +71,11 @@ export const signIn = async (req, res, next) => {
     }
     const token = generateToken(user._id);
 
-    res.status(200).json({ token, user });
+    res.cookie("token", token, { httpOnly: true, secure: false, sameSite: "Lax", maxAge: 7 * 24 * 60 * 60 * 1000, }).json({
+      success: true,
+      message: "User Sign In Successfully!",
+      user
+    });
   } catch (error) {
     return res.status(500).json({ message: "Internal Server Error!" });
   }
@@ -78,9 +83,7 @@ export const signIn = async (req, res, next) => {
 
 export const signOut = async (req, res, next) => {
   try {
-    res
-      .status(200)
-      .json({ message: "Logout successful. Just remove token on client." });
+    res.clearCookie("token").json({ success: true, message: "User Logout!" });
   } catch (error) {
     return res.status(500).json({ message: "Internal Server Error!" });
   }
