@@ -1,0 +1,10 @@
+This is the .env credentials, kindly create .env file on root of server folder and then paste this creds  
+
+
+PORT=5001
+MONGO_URI=mongodb://localhost:27017/bookstore_app
+JWT_SECRET=bookstore_app
+
+CLOUDINARY_CLOUD_NAME=ds5qzuxwc
+CLOUDINARY_API_KEY= 258413183822575
+CLOUDINARY_API_SECRET=RZiuCN3fUfMus__mfkssPNt6ALQ
