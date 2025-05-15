@@ -1,12 +1,58 @@
-# React + Vite
+# Bookstore React App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, responsive Bookstore web application built with **React.js**.  
+This project uses **React Bootstrap** for UI design and **Redux Toolkit** for efficient state management.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Table of Contents
 
-## Expanding the ESLint configuration
+- [Features](#features)  
+- [Technologies Used](#technologies-used)  
+- [Getting Started](#getting-started)  
+- [Project Structure](#project-structure)  
+- [Available Scripts](#available-scripts)  
+- [State Management](#state-management)  
+- [Styling](#styling)  
+- [Contributing](#contributing)  
+- [License](#license)
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## Features
+
+- Browse and filter books in various categories  
+- View detailed information for each book  
+- Add, update, and remove books (admin functionality)  
+- Responsive UI designed with React Bootstrap  
+- Smooth and predictable state management with Redux Toolkit  
+- User authentication  
+- Filter and sort books based on different criteria  
+
+---
+
+## Technologies Used
+
+- **React.js** - Frontend library for building UI  
+- **React Bootstrap** - UI components and responsive design  
+- **Redux Toolkit** - Simplified Redux state management  
+- **React Router** - Client-side routing  
+- **Axios / Fetch** - For API calls (if applicable)  
+- **ESLint & Prettier** - Code quality and formatting
+
+---
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js (v14 or above)  
+- npm or yarn package manager
+
+### Installation
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/Azar-Ahmed/bookstore-app.git
+   cd bookstore-react-app
